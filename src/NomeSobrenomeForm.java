@@ -21,12 +21,13 @@ public class NomeSobrenomeForm extends javax.swing.JFrame {
     private JTextField jTextFieldIdade;
     private JLabel jLabelIdade;
     private ArrayList<Pessoa> nomes = new ArrayList<>();
-    private Pessoa pessoa;
+
 
     private NomeSobrenomeForm() {
         buttonOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Pessoa pessoa = new Pessoa();
                 if (jTextFieldNome.getText().isEmpty() || jTextFieldSobrenome.getText().isEmpty()){
                     JOptionPane
                             .showMessageDialog(
@@ -51,10 +52,10 @@ public class NomeSobrenomeForm extends javax.swing.JFrame {
 
                 }
                 for (Pessoa p : nomes){
-                    System.out.println(p);
+                    System.out.println(p.getNome()+" "+p.getSobrenome()+" "+String.valueOf(p.getIdade()));
                 }
-                jLabelNome.setForeground(BLUE);
-                jTextFieldNome.setBackground(RED);
+                //jLabelNome.setForeground(BLUE);
+                //jTextFieldNome.setBackground(RED);
 
 
 
