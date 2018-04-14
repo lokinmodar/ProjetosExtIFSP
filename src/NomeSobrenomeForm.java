@@ -28,38 +28,52 @@ public class NomeSobrenomeForm extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Pessoa pessoa = new Pessoa();
-                if (jTextFieldNome.getText().isEmpty() || jTextFieldSobrenome.getText().isEmpty()){
+                try {
+                    Integer.parseInt(jTextFieldIdade.getText());
+                    if (jTextFieldNome.getText().isEmpty() || jTextFieldSobrenome.getText().isEmpty() || jTextFieldIdade.getText().isEmpty()) {
+                        JOptionPane
+                                .showMessageDialog(
+                                        JOptionPane.getRootFrame()
+                                                .getParent(), "O usuário precisa preencher nome, sobrenome e idade",
+                                        "Erro de leutura",
+                                        JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        String msg = "Bem-vindo " + jTextFieldNome.getText() + " " + jTextFieldSobrenome.getText();
+                        JOptionPane
+                                .showMessageDialog(
+                                        JOptionPane.getRootFrame()
+                                                .getParent(), msg,
+                                        "Bem-vindo",
+                                        JOptionPane.INFORMATION_MESSAGE);
+
+                        pessoa.setNome(jTextFieldNome.getText());
+                        pessoa.setSobrenome(jTextFieldSobrenome.getText());
+                        pessoa.setIdade(Integer.parseInt(jTextFieldIdade.getText()));
+
+                        nomes.add(pessoa);
+
+                        for (Pessoa p : nomes) {
+                            System.out.println(p.toString());
+                        }
+                    }
+
+
+                } catch (NumberFormatException exception) {
                     JOptionPane
                             .showMessageDialog(
                                     JOptionPane.getRootFrame()
-                                    .getParent(), "O usuário precisa preencher nome e sobrenome",
+                                            .getParent(), "Digite uma idade válida!",
                                     "Erro de leutura",
                                     JOptionPane.ERROR_MESSAGE);
-                } else {
-                    String msg = "Bem-vindo " + jTextFieldNome.getText() + " " + jTextFieldSobrenome.getText();
-                    JOptionPane
-                            .showMessageDialog(
-                                    JOptionPane.getRootFrame()
-                                            .getParent(), msg,
-                                    "Bem-vindo",
-                                    JOptionPane.INFORMATION_MESSAGE);
-
-                    pessoa.setNome(jTextFieldNome.getText());
-                    pessoa.setSobrenome(jTextFieldSobrenome.getText());
-                    pessoa.setIdade(Integer.parseInt(jTextFieldIdade.getText()));
-
-                    nomes.add(pessoa);
-
                 }
-                for (Pessoa p : nomes){
-                    System.out.println(p.getNome()+" "+p.getSobrenome()+" "+String.valueOf(p.getIdade()));
-                }
-                //jLabelNome.setForeground(BLUE);
-                //jTextFieldNome.setBackground(RED);
 
 
-
+                //.getNome()+" "+p.getSobrenome()+" "+String.valueOf(p.getIdade()));
             }
+            //jLabelNome.setForeground(BLUE);
+            //jTextFieldNome.setBackground(RED);
+
+
         });
     }
 
