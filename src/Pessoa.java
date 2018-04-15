@@ -30,8 +30,8 @@ public class Pessoa implements Serializable {
     }
 
 
-    @Override
+
     public String toString() {
-        return super.toString();
+        return "Nome completo: " + nome + " " + sobrenome + ". Idade: " + String.valueOf(idade);
     }
 }

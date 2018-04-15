@@ -4,6 +4,10 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -21,9 +25,21 @@ public class NomeSobrenomeForm extends javax.swing.JFrame {
     private JTextField jTextFieldIdade;
     private JLabel jLabelIdade;
     private ArrayList<Pessoa> nomes = new ArrayList<>();
+    BufferedWriter bufferedWriter;
+
 
 
     private NomeSobrenomeForm() {
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter(new File("nomes.txt")));
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane
+                    .showMessageDialog(
+                            JOptionPane.getRootFrame()
+                                    .getParent(), e.getMessage(), "Erro ao criar arquivo de saída",
+                            JOptionPane.ERROR_MESSAGE);
+        }
         buttonOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,6 +71,9 @@ public class NomeSobrenomeForm extends javax.swing.JFrame {
                         for (Pessoa p : nomes) {
                             System.out.println(p.toString());
                         }
+                        bufferedWriter.write(pessoa.toString());
+                        bufferedWriter.newLine();
+                        bufferedWriter.flush();
                     }
 
 
@@ -64,6 +83,13 @@ public class NomeSobrenomeForm extends javax.swing.JFrame {
                                     JOptionPane.getRootFrame()
                                             .getParent(), "Digite uma idade válida!",
                                     "Erro de leutura",
+                                    JOptionPane.ERROR_MESSAGE);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                    JOptionPane
+                            .showMessageDialog(
+                                    JOptionPane.getRootFrame()
+                                            .getParent(), e1.getMessage(), "Erro ao criar arquivo de saída",
                                     JOptionPane.ERROR_MESSAGE);
                 }
 
